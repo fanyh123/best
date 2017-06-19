@@ -21,7 +21,7 @@
   </servlet>
   <servlet-mapping>
 		<servlet-name>springMVC</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>/</url-pattern><!-- 捕获所有请求，包含静态资源请求 -->
   </servlet-mapping>
   
   <welcome-file-list>
