@@ -2,14 +2,18 @@
 <beans xmlns="http://www.springframework.org/schema/beans"  
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
     xmlns:context="http://www.springframework.org/schema/context"  
-    xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+ 	xmlns:tx="http://www.springframework.org/schema/tx" 
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd  
-        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
     
-    <context:property-placeholder location="classpath:*.properties"/>
+    <context:property-placeholder location="classpath:*.properties" ignore-unresolvable="false"/><!-- 找不到的情况下抛出异常 -->
     
-    <!-- 配置数据源 -->    
+    <!-- 配置数据源 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="driverClass" value="${jdbc.driverClass}" />
         <property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
@@ -47,8 +51,22 @@
         <property name="statementExecutableSqlLogEnable" value="false" /> 
     </bean>
     
-    <!-- 配置MyBatis -->
-    <bean id="" class=""></bean>
+    <!-- 整合MyBatis -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" ref="classpath:mybatis.xml"/>
+        <property name="mapperLocations" ref="classpath:com.ran.test.mapping/*.xml"/>
+    </bean>
+    <!-- 扫描mapper接口文件 -->
+    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.ran.test.dao.mapper"/>
+    </bean>
     
+    <!-- 配置spring事物管理 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 基于AOP的方式做事物拦截 -->
+    <aop:config></aop:config>
         
 </beans>
