@@ -135,11 +135,16 @@
         <artifactId>mybatis-spring</artifactId>
         <version>1.2.2</version>
     </dependency>
+    <dependency>
+    	<groupId>com.github.miemiedev</groupId>
+    	<artifactId>mybatis-paginator</artifactId>
+    	<version>1.2.10</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>Test</finalName>
   </build>
   <properties>
-  	<springVersion>4.1.6.RELEASE</springVersion>	
+  	<springVersion>4.1.6.RELEASE</springVersion>  		
   </properties>
 </project>
