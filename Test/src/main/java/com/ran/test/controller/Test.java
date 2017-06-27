@@ -5,12 +5,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,7 +24,8 @@ public class Test {
 	Logger logger = Logger.getLogger(Test.class);
 	
 	@RequestMapping("a/test")
-	public String a(){//返回页面，视图解析，最终也是要走ModelAndView
+	public String a(HttpServletRequest request){//返回页面，视图解析，最终也是要走ModelAndView
+		String encode = request.getCharacterEncoding();
 		logger.info("a/test + test");
 		return "test";
 	}

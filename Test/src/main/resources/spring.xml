@@ -56,6 +56,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="configLocation" ref="classpath:mybatis.xml"/>
         <property name="mapperLocations" ref="classpath:com.ran.test.mapping/*.xml"/>
+        <property name="typeAliasesPackage" value="com.ran.test.entity" />
     </bean>
     <!-- 扫描mapper接口文件 -->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
