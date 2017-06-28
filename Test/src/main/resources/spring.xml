@@ -11,7 +11,9 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
     
-    <context:property-placeholder location="classpath:*.properties" ignore-unresolvable="false"/><!-- 找不到的情况下抛出异常 -->
+    <!-- 在spring容器中加载配置文件,配置文件中的值spring容器中初始化的bean中能取到,跟当前容器中配置的扫描的包和注解有关.
+     ignore-unresolvable="false"找不到文件的情况下抛出异常 -->
+    <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="false"/>
     
     <!-- 配置数据源 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
