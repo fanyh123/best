@@ -19,7 +19,7 @@ public class TestThread {
 		 *
 		 * 线程、线程池:处理队列中的任务
 		 * 任务队列:BlockingQueue、LinkedBlockingQueue、LinkedList<Runnable> workQueue实现队列
-		 * Queue的特点：FIFO，队列阻塞
+		 * Queue的特点：FIFO，阻塞队列
 		 * LinkedList实现了Queue接口
 		 * JUC,减少synchronized会造成的阻塞和死锁。
 		 */
