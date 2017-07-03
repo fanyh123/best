@@ -55,8 +55,8 @@
     
     <!-- 配置数据源 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="driverClass" value="${jdbc.driverClass}" />
-        <property name="jdbcUrl" value="${jdbc.jdbcUrl}" />
+        <property name="driverClassName" value="${jdbc.driverClass}" />
+        <property name="url" value="${jdbc.jdbcUrl}" />
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
         <!-- 配置连接池大小 -->
@@ -94,8 +94,8 @@
     <!-- 整合MyBatis -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="configLocation" ref="classpath:mybatis.xml"/>
-        <property name="mapperLocations" ref="classpath:com.ran.test.mapping/*.xml"/>
+        <property name="configLocation" value="classpath:mybatis.xml"/>
+        <property name="mapperLocations" value="classpath:com/ran/test/mapping/*.xml"/>
         <property name="typeAliasesPackage" value="com.ran.test.entity" />
     </bean>
     <!-- 扫描mapper接口文件 -->
