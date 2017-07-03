@@ -16,9 +16,11 @@
     <context:property-placeholder location="classpath:jdbc.properties" ignore-unresolvable="false"/>
     
     <!-- 配置redis cluster，至少3个节点才能启动集群，这里配置6个，3对主从。可以是6个端口，也可以是多个服务器。
-                      需要启动6个redis实例,然后创建集群。                
+                      服务器上需要启动6个redis实例,然后创建集群。                
          Jedis        JedisPool  单台
-         SharedJedis  SharedJedisPool 分布式redis集群客户端       分片。实现多redis实例协同服务。
+         ShardedJedis  ShardedJedisPool 基于一致性哈希算法的分布式redis集群客户端。每台服务器节点采用hash算法分为160个虚拟节点。
+                      虚拟节点采用treemap存储，连接采用linkedhashmap存储。
+         
          JedisCluster redis官方集群方案，哈希槽散列。整个集群被看做一个整体操作，像操作单实例redis一样操作集群。
          redis Cluster中，每个节点保存数据，每个节点都和其他所有节点相连，每个节点的从节点都可以成为主节点。存数据和取数据的路由算法一直，所以存取会到一个卡槽。
                       只有集群中主节点完整才能访问，任何一个主节点丢失都不能访问。
@@ -27,10 +29,28 @@
                       事物:multi [QUEUE] exec discard，redis的事物提交，如果有一个失败的不会影响其他的正常提交，这点与数据库事物不一样。
                       加乐观锁：watch。加锁以后要开启事物，这样加锁才会有意义。
                       主从
-                      持久化(到磁盘文件)：用于重启后的数据恢复。RDB和AOF，前者为默认
-                      集群
+                      持久化(到磁盘文件)：用于重启后的数据恢复。快照和AOF，前者为默认。    
+                      快照：fork出子进程，父进程处理客户端的写操作，子进程把内存中的数据写入临时文件。临时文件替换原来的快照文件。副本是全量的。依赖OS的实时复制机制。
+                              强制持久化：save(阻塞client请求，直到持久化完成),bgsave(fork出子进程，不会阻塞客户端请求)。
+         AOF：每间隔几秒做一次全量磁盘写入。                      
           -->
-    <bean id="jedisCluster" class=""></bean>
+         
+    <bean name="genericObjectPoolConfig" class="org.apache.commons.pool2.impl.GenericObjectPoolConfig" >  
+        <property name="maxWaitMillis" value="3000" />
+        <property name="maxTotal" value="3000" />
+        <property name="minIdle" value="10" />
+        <property name="maxIdle" value="100" />
+	</bean>
+	
+    <bean id="jedisCluster" class="com.ran.test.util.JedisClusterFactory">
+        <property name="resource"><value>classpath:redis.properties</value></property>
+        <property name="addressKeyPrefix" value="address"/>
+        <property name="connectionTimeout" value="3000"/>
+        <property name="soTimeout" value="1000"/>
+        <property name="maxAttempts" value="100"/>
+        <property name="poolConfig" ref="genericObjectPoolConfig"/>
+        <property name="password" value="xjx*123*pas"/>
+    </bean>
     
     
     <!-- 配置数据源 -->
