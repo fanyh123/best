@@ -18,10 +18,11 @@
     <!-- 配置redis cluster，至少3个节点才能启动集群，这里配置6个，3对主从。可以是6个端口，也可以是多个服务器。
                       服务器上需要启动6个redis实例,然后创建集群。                
          Jedis        JedisPool  单台
-         ShardedJedis  ShardedJedisPool 基于一致性哈希算法的分布式redis集群客户端。每台服务器节点采用hash算法分为160个虚拟节点。
+         ShardedJedis  ShardedJedisPool 基于一致性哈希算法的分布式redis分片集群客户端。每台服务器节点采用hash算法分为160个虚拟节点。
+         redis3.0之前的分片集群方案，client端集群。
                       虚拟节点采用treemap存储，连接采用linkedhashmap存储。
          
-         JedisCluster redis官方集群方案，哈希槽散列。整个集群被看做一个整体操作，像操作单实例redis一样操作集群。
+         JedisCluster redis3.0官方集群方案，server端集群，哈希槽散列。整个集群被看做一个整体操作，像操作单实例redis一样操作集群。
          redis Cluster中，每个节点保存数据，每个节点都和其他所有节点相连，每个节点的从节点都可以成为主节点。存数据和取数据的路由算法一直，所以存取会到一个卡槽。
                       只有集群中主节点完整才能访问，任何一个主节点丢失都不能访问。
          

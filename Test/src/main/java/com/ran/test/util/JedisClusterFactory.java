@@ -25,7 +25,7 @@ public class JedisClusterFactory implements FactoryBean<JedisCluster>, Initializ
 	private Integer soTimeout;
 	private GenericObjectPoolConfig poolConfig;//对象池化的配置commons-pool
 	
-	private Pattern p = Pattern.compile("^.+[:]\\d{1,5}\\s*$");
+	private Pattern p = Pattern.compile("^.+[:]\\d{1,5}\\s*$");//验证ip加端口的格式
 	
 	private Set<HostAndPort> parseHostAndPort() throws Exception{
 		try{
