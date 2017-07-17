@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+ 	xmlns:tx="http://www.springframework.org/schema/tx" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd  
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+    <!-- JMS主要模型有p2p、topic。
+         JMS通过异步处理、保存并转发和保证转发机制保证业务程序的连续运行。
+         主要依赖类：1、连接工厂和目的地(遵循JNDI,ConnectionFactory和Destination)；
+           2、连接和会话(Connection和Session)；
+           3、消息、消息的生产者和消息的消费者(Message、MessageProducer和MessageConsumer)。
+          两种模型的实现类：  QueueConnectionFactory Queue
+                QueueConnection   QueueSession
+                Message  QueueSender  QueueReceiver
+                                
+                TopicConnectionFactory Topic
+                TopicConnection   TopicSession
+                Message  TopicPublisher  TopicSubscriber
+                                               
+     -->
+
+
+      
+</beans>
