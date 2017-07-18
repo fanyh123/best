@@ -1,4 +1,4 @@
-package com.ran.test.aop.advice;
+package com.ran.test.aop.advice.service;
 
 public interface BankService {
 	
