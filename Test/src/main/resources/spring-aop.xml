@@ -14,7 +14,15 @@
     <bean id="bankService" class="com.ran.test.aop.advice.service.BankServiceImpl"/>
     <!-- 切面 -->
     <bean id="myAspect" class="com.ran.test.aop.advice.MyAspect"/>
-    <!-- aop配置 -->
+    <!-- aop配置: 
+			    pointcut 横切点 
+			    aspect 切面
+			    joinpoint 连接点
+			    advice 通知
+			    
+			    http://www.cnblogs.com/davidwang456/p/4013631.html
+			    唯品会网关设计 http://www.cnblogs.com/davidwang456/p/6845178.html
+    -->
     <aop:config>
         <aop:aspect ref="myAspect">
             <aop:pointcut expression="execution(* com.ran.test.aop.advice.service.*.*(..))" id="pointcut"/>
@@ -24,7 +32,7 @@
             <aop:after-throwing method="afterThrowing" pointcut-ref="pointcut"/>
             <aop:around method="around" pointcut-ref="pointcut"/>
         </aop:aspect>
-    </aop:config>  
+    </aop:config>
         
         
 </beans>
