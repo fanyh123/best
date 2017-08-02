@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +17,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import redis.clients.jedis.JedisCluster;
+
 import com.ran.test.entity.User;
 
 @Controller
 public class Test {
 	
 	Logger logger = Logger.getLogger(Test.class);
+	
+	@Autowired
+	private JedisCluster jedisCluster;
+	
+	@RequestMapping("/test/test")
+	public void test(){
+		jedisCluster.set("name", "12345");
+		String name = jedisCluster.get("name");
+		System.out.println("name finish......"+name);
+	}
 	
 	@RequestMapping("a/test")
 	public String a(HttpServletRequest request){//返回页面，视图解析，最终也是要走ModelAndView

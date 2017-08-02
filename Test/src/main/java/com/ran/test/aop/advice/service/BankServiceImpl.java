@@ -1,13 +1,12 @@
 package com.ran.test.aop.advice.service;
 
-import org.springframework.stereotype.Service;
 
-@Service
 public class BankServiceImpl implements BankService {
 
 	@Override
 	public boolean transfer(String form, String to, double account) {
 		// TODO Auto-generated method stub
+		System.out.println("transfer begin......");
 		if(account<100) {
             throw new IllegalArgumentException("最低转账金额不能低于100元");
         }

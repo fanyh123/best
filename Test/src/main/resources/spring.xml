@@ -125,7 +125,7 @@
                        五种通知的执行顺序：前置通知》》环绕通知》》正常返回通知/异常返回通知》》返回通知
                        定义事务的传播行为(包含切面)和定义通知 -->
     
-    <aop:config>
+    <!-- <aop:config>
         <aop:pointcut expression="" id=""/>
         <aop:advisor advice-ref=""/>
     </aop:config>    
@@ -136,7 +136,7 @@
             <tx:method name=""/>
             <tx:method name=""/> 
         </tx:attributes>
-    </tx:advice>
+    </tx:advice> -->
     
        
 </beans>
