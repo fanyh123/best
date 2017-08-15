@@ -16,11 +16,11 @@
     <bean id="myAspect" class="com.ran.test.aop.advice.MyAspect"/>
     <!-- aop配置: 
                 AOP的基础：横切  反射  动态代理  拦截器;
-                                        代理对象的生成：工厂模式 proxyFactory proxyFactoryBean。
-                
-			    pointcut 横切点 
-			    aspect 切面,业务逻辑代码与AOP代码产生关系
-			    joinpoint 连接点
+                                        代理对象的生成：工厂模式 proxyFactory proxyFactoryBean。               
+			     
+			    aspect 切面,包含pointcut和advice代码。
+			    pointcut 横切点,选择了一个或者多个joinpoint的表达式。
+			    joinpoint 连接点，程序执行中的某个点，通知介入的地方。
 			    advice 通知,定义在连接点,为切面功能增强提供织入接口。
 			    
 			         五种通知类型：前置通知，正常返回通知、异常返回通知(出现异常才会走)、返回通知，环绕通知(可以决定joinpoint是否继续执行)。
@@ -41,7 +41,7 @@
             <aop:after method="after" pointcut-ref="pointcut"/>
             <aop:after-returning method="afterReturning" pointcut-ref="pointcut"/>
             <aop:after-throwing method="afterThrowing" pointcut-ref="pointcut"/>
-            <aop:around method="around" pointcut-ref="pointcut"/><!-- 配置了环绕通知，连接点不会执行。 -->
+            <aop:around method="around" pointcut-ref="pointcut"/><!-- 配置了环绕通知，可以决定连接点不执行。 -->
         </aop:aspect>
     </aop:config>
     
