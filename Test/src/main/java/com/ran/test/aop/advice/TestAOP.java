@@ -10,9 +10,10 @@ public class TestAOP {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		ApplicationContext context = new ClassPathXmlApplicationContext("spring-aop.xml");
-        BankService bankService = context.getBean("bankService", BankService.class);
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-aop.xml");
+        BankService bankService = (BankService)ctx.getBean("bankService");
         boolean res = bankService.transfer("张三", "李四", 200);
+        //bankService.test();
         System.out.println("bank transfer resulte = " + res);
 
 	}

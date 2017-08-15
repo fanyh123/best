@@ -1,5 +1,7 @@
 package com.ran.test.aop.advice;
 
+import org.aspectj.lang.ProceedingJoinPoint;
+
 public class MyAspect {
 	
 	public boolean before(){
@@ -7,8 +9,15 @@ public class MyAspect {
 		return true;
 	}
 	
-	public boolean around(){
+	public boolean around(ProceedingJoinPoint pJoinPoint ){
 		System.out.println("MyAspect around notice......");
+		try {
+			Object res = pJoinPoint.proceed();
+			System.out.println("around res = " + res);
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return true;
 	}
 	

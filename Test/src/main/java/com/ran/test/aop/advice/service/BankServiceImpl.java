@@ -14,4 +14,10 @@ public class BankServiceImpl implements BankService {
         return false;
 	}
 
+	@Override
+	public void test() {
+		// TODO Auto-generated method stub
+		System.out.println("--------BankServiceImpl");
+	}
+
 }

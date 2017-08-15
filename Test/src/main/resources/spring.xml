@@ -109,34 +109,5 @@
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-    <!-- 基于AOP的方式做事务拦截，通过AOP定义事务的增强切面。
-         AOP配置的方式实现事务管理，使事务处理这一横切面的代码从业务代码中分离。
-         AOP的基础：横切  反射  动态代理  拦截器;
-                      代理对象的生成：工厂模式 proxyFactory proxyFactoryBean。
-                     
-         AOP的实现方式与公共子模块调用的区别：后者是硬调用，程序中还是有很多重复的调用语句代码；前者是软嵌入，业务逻辑中不再有AOP的调用代码。AOP的逻辑都在配置文件种。
-         
-         pointcut横切点
-         aspect切面：业务逻辑代码与AOP代码产生关系
-         joinpoint连接点
-         advice通知：定义在连接点，为切面功能增强提供织入接口。
-         
-                       五种通知类型：前置通知，正常返回通知、异常返回通知、返回通知，环绕通知(可以决定joinpoint是否继续执行)。
-                       五种通知的执行顺序：前置通知》》环绕通知》》正常返回通知/异常返回通知》》返回通知
-                       定义事务的传播行为(包含切面)和定义通知 -->
-    
-    <!-- <aop:config>
-        <aop:pointcut expression="" id=""/>
-        <aop:advisor advice-ref=""/>
-    </aop:config>    
-    <tx:advice>
-        <tx:attributes>
-            <tx:method name=""/>
-            <tx:method name=""/>
-            <tx:method name=""/>
-            <tx:method name=""/> 
-        </tx:attributes>
-    </tx:advice> -->
-    
        
 </beans>
